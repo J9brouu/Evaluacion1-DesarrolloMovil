@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content class="login-page" [fullscreen]="true">
+  <div class="bg-gradient" aria-hidden="true"></div>
+
+  <div class="container">
+
+    <h1 class="page-title">Bienvenido de nuevo</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="card pill-card" novalidate>
+      <!-- blobs decorativos -->
+      <div class="blob blob-top-left" aria-hidden="true"></div>
+      <div class="blob blob-bottom-right" aria-hidden="true"></div>
+
+      <div class="pill-inputs">
+        <div class="pill-row">
+          <ion-icon name="person-outline" class="left-icon"></ion-icon>
+          <div class="pill-content">
+            <label class="pill-label">Correo electrónico</label>
+            <input class="native-input" formControlName="email" placeholder="ejemplo@correo.com" type="email" autocomplete="email" />
+            <div class="field-error" *ngIf="email.invalid && (email.touched || email.dirty)">
+              <small *ngIf="email.errors?.['required']">El correo es requerido.</small>
+              <small *ngIf="email.errors?.['email']">Formato de correo inválido (ej. usuario@dominio.com).</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="pill-row">
+          <ion-icon name="lock-closed-outline" class="left-icon"></ion-icon>
+          <div class="pill-content">
+            <label class="pill-label">Contraseña</label>
+            <input class="native-input" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Introduce tu contraseña" autocomplete="current-password" />
+          </div>
+          <button class="action-circle" type="button" aria-label="mostrar contraseña" (click)="toggleShowPassword()" [attr.aria-pressed]="showPassword">
+            <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+          </button>
+        </div>
+      </div>
+
+      <ion-note color="danger" *ngIf="(email.invalid && (email.touched || email.dirty)) || (password.invalid && (password.touched || password.dirty))" class="form-note">
+        Completa los campos correctamente
+      </ion-note>
+
+      <div class="row-between small-opts">
+        <ion-item lines="none" class="options-row">
+          <ion-checkbox slot="start" formControlName="remember"></ion-checkbox>
+          <ion-label>Recordarme</ion-label>
+        </ion-item>
+        <ion-button fill="clear" size="small" (click)="forgotPassword()" type="button">¿Olvidaste la contraseña?</ion-button>
+      </div>
+
+      <div class="cta-row">
+        <!-- el botón se deshabilita si el formulario es inválido; el submit dispara (ngSubmit) en el form -->
+        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="btn-primary">Iniciar sesión</ion-button>
+        <ion-button fill="clear" size="small" (click)="goToRegister()" class="btn-register">Crear cuenta</ion-button>
+      </div>
+
+      <div class="divider"><span>o</span></div>
+      <div class="social-buttons">
+        <ion-button expand="block" color="light" (click)="socialLogin('google')" class="social google">
+          <ion-icon name="logo-google" slot="start"></ion-icon>
+          <span>Continuar con Google</span>
+        </ion-button>
+        <ion-button expand="block" color="light" (click)="socialLogin('facebook')" class="social fb">
+          <ion-icon name="logo-facebook" slot="start"></ion-icon>
+          <span>Continuar con Facebook</span>
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content class="list-page" [fullscreen]="true">
+  <div class="bg-gradient" aria-hidden="true"></div>
+
+  <div class="container">
+    <h3 class="page-title">Mi colección de juegos</h3>
+
+    <div class="card list-card">
+      <div class="blob blob-top-left" aria-hidden="true"></div>
+      <div class="blob blob-bottom-right" aria-hidden="true"></div>
+
+      <div class="controls">
+        <ion-searchbar class="searchbar" [(ngModel)]="filter" placeholder="Buscar por título o plataforma" hideCancelButton="true"></ion-searchbar>
+        <button class="add-fab" type="button" aria-label="Agregar juego" (click)="openAdd()">
+        <ion-icon name="add-outline"></ion-icon>
+        <span class="btn-text">Agregar Juegos</span>
+      </button>
+      </div>
+
+      <div class="items">
+        <ng-container *ngFor="let g of games | filterGames:filter; trackBy:trackById">
+          <div class="pill-row game-row">
+            <div class="left-icon">
+              <img *ngIf="g.cover" [src]="g.cover" (error)="onImgError($event, g)" alt="cover" />
+              <ion-icon *ngIf="!g.cover" name="game-controller-outline"></ion-icon>
+            </div>
+            <div class="pill-content">
+              <div class="title">{{ g.title }}</div>
+              <div class="meta">{{ g.platform }} • {{ g.year }} • {{ g.genre }}</div>
+            </div>
+
+            <button class="action-circle" type="button" aria-label="Ver detalle" (click)="viewDetail(g)">
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </button>
+          </div>
+        </ng-container>
+
+        <div *ngIf="(games | filterGames:filter).length === 0" class="empty">
+          No se encontraron juegos.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
+

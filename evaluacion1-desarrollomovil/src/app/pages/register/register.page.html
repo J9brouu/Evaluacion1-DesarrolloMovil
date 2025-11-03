@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content class="login-page" [fullscreen]="true">
+  <div class="bg-gradient" aria-hidden="true"></div>
+
+  <div class="container">
+    <h1 class="page-title">Crea tu cuenta</h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="card pill-card" novalidate>
+      <div class="blob blob-top-left" aria-hidden="true"></div>
+      <div class="blob blob-bottom-right" aria-hidden="true"></div>
+
+      <div class="pill-inputs">
+        <div class="pill-row">
+          <ion-icon name="person-circle-outline" class="left-icon"></ion-icon>
+          <div class="pill-content">
+            <label class="pill-label">Nombre completo</label>
+            <input class="native-input" formControlName="name" placeholder="Tu nombre" type="text" autocomplete="name" />
+          </div>
+        </div>
+
+        <div class="pill-row">
+          <ion-icon name="mail-outline" class="left-icon"></ion-icon>
+          <div class="pill-content">
+            <label class="pill-label">Correo electrónico</label>
+            <input class="native-input" formControlName="email" placeholder="ejemplo@correo.com" type="email" autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="pill-row">
+          <ion-icon name="lock-closed-outline" class="left-icon"></ion-icon>
+          <div class="pill-content">
+            <label class="pill-label">Contraseña</label>
+            <input class="native-input" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Crea una contraseña" autocomplete="new-password" />
+          </div>
+          <button class="action-circle" type="button" aria-label="mostrar contraseña" (click)="toggleShowPassword()" [attr.aria-pressed]="showPassword">
+            <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+          </button>
+        </div>
+
+        <div class="pill-row">
+          <ion-icon name="lock-open-outline" class="left-icon"></ion-icon>
+          <div class="pill-content">
+            <label class="pill-label">Confirmar contraseña</label>
+            <input class="native-input" [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Repite la contraseña" autocomplete="new-password" />
+          </div>
+        </div>
+      </div>
+
+      <!-- inline field errors -->
+      <div class="pill-row-errors">
+        <div *ngIf="name.invalid && (name.touched || name.dirty)" class="field-error">
+          <small *ngIf="name.errors?.['required']">Este campo es obligatorio.</small>
+        </div>
+        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)" class="field-error">
+          <small *ngIf="registerForm.get('email')?.errors?.['required']">El correo es requerido.</small>
+          <small *ngIf="registerForm.get('email')?.errors?.['email']">Formato de correo inválido.</small>
+        </div>
+        <div *ngIf="password.invalid && (password.touched || password.dirty)" class="field-error">
+          <small *ngIf="password.errors?.['required']">La contraseña es requerida.</small>
+          <small *ngIf="password.errors?.['minlength']">La contraseña debe tener al menos {{ password.errors?.['minlength']?.requiredLength }} caracteres.</small>
+        </div>
+        <div *ngIf="confirmPassword.invalid && (confirmPassword.touched || confirmPassword.dirty)" class="field-error">
+          <small *ngIf="confirmPassword.errors?.['required']">Confirma tu contraseña.</small>
+        </div>
+      </div>
+
+      <ion-note color="danger" *ngIf="(password.value && confirmPassword.value && password.value !== confirmPassword.value)" class="form-note">
+        Las contraseñas no coinciden
+      </ion-note>
+
+      <div class="cta-row">
+        <ion-button expand="block" type="submit" [disabled]="registerForm.invalid" class="btn-primary">Crear cuenta</ion-button>
+        <ion-button fill="clear" size="small" (click)="goToLogin()" class="btn-register">Ya tengo cuenta</ion-button>
+      </div>
+
+      <div class="divider"><span>o</span></div>
+      <div class="social-buttons">
+        <ion-button expand="block" color="light" (click)="socialLogin('google')" class="social google">
+          <ion-icon name="logo-google" slot="start"></ion-icon>
+          <span>Continuar con Google</span>
+        </ion-button>
+        <ion-button expand="block" color="light" (click)="socialLogin('facebook')" class="social fb">
+          <ion-icon name="logo-facebook" slot="start"></ion-icon>
+          <span>Continuar con Facebook</span>
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

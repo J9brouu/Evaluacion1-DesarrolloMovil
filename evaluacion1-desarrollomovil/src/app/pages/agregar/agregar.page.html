@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">agregar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="add-page">
+    <div class="bg-gradient"></div>
+    <div class="container">
+      <h2 class="page-title">Agregar juego</h2>
+
+      <div class="form-card">
+        <div class="blob blob-top-left" aria-hidden="true"></div>
+      <div class="blob blob-bottom-right" aria-hidden="true"></div>
+        <form [formGroup]="form" (ngSubmit)="save()">
+
+          <div class="pill-row">
+            <label class="pill-content">
+              <div class="label">Título</div>
+              <input class="native-input" formControlName="title" placeholder="Ej. Hollow Knight" />
+            </label>
+            <div class="field-error" *ngIf="form.get('title')?.invalid && (form.get('title')?.touched || form.get('title')?.dirty)">
+              <small *ngIf="form.get('title')?.errors?.['required']">El título es obligatorio.</small>
+              <small *ngIf="form.get('title')?.errors?.['minlength']">El título es demasiado corto.</small>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            <label class="pill-content">
+              <div class="label">Plataforma</div>
+              <input class="native-input" formControlName="platform" placeholder="Ej. PC / PS4 / Switch" />
+            </label>
+            <div class="field-error" *ngIf="form.get('platform')?.invalid && (form.get('platform')?.touched || form.get('platform')?.dirty)">
+              <small *ngIf="form.get('platform')?.errors?.['required']">La plataforma es obligatoria.</small>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            <label class="pill-content">
+              <div class="label">Género</div>
+              <input class="native-input" formControlName="genre" placeholder="Ej. Acción, RPG" />
+            </label>
+          </div>
+
+          <div class="pill-row">
+            <label class="pill-content">
+              <div class="label">Año</div>
+              <input type="number" class="native-input" formControlName="year" placeholder="Ej. 2017" />
+            </label>
+            <div class="field-error" *ngIf="form.get('year')?.invalid && (form.get('year')?.touched || form.get('year')?.dirty)">
+              <small *ngIf="form.get('year')?.errors?.['min']">Año inválido (mín {{ form.get('year')?.errors?.['min']?.min }}).</small>
+              <small *ngIf="form.get('year')?.errors?.['max']">Año inválido (máx {{ form.get('year')?.errors?.['max']?.max }}).</small>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            <label class="pill-content">
+              <div class="label">Precio (CLP)</div>
+              <input type="number" inputmode="numeric" class="native-input" formControlName="price" placeholder="Ej. 19990" />
+            </label>
+            <div class="field-error" *ngIf="form.get('price')?.invalid && (form.get('price')?.touched || form.get('price')?.dirty)">
+              <small *ngIf="form.get('price')?.errors?.['required']">El precio es obligatorio.</small>
+              <small *ngIf="form.get('price')?.errors?.['pattern']">Ingrese un número válido (sin comas ni puntos).</small>
+              <small *ngIf="form.get('price')?.errors?.['min']">El precio debe ser mayor o igual a {{ form.get('price')?.errors?.['min']?.min }}.</small>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            <label class="pill-content">
+              <div class="label">URL de portada (opcional)</div>
+              <input class="native-input" formControlName="cover" placeholder="assets/img/library-cover.png o https://..." />
+            </label>
+          </div>
+
+          <div class="actions">
+            <!-- Botón principal con texto (Agregar) -->
+            <button type="submit" class="btn-primary" [disabled]="form.invalid" aria-label="Agregar">
+              <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+              <span class="btn-text">Agregar</span>
+            </button>
+
+            <!-- Botón cancelar -->
+            <button type="button" class="btn-cancel" (click)="cancel()" aria-label="Cancelar">
+              <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+              <span class="btn-text">Cancelar</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

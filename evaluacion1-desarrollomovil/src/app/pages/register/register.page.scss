@@ -1,0 +1,43 @@
+.login-page {
+  /* fuerza color de texto por defecto a gris oscuro para evitar que herede blanco */
+  color: #0b1220; /* negro/azulado muy oscuro */
+  /* Reuse same visual style as login */
+  --background: transparent;
+  position: relative;
+  min-height: 100%;
+
+  .bg-gradient { position: absolute; inset: 0; background: linear-gradient(180deg, #f7f8fa 0%, #fbfcfd 100%); z-index:0; }
+
+  .container { position: relative; z-index: 2; display:flex; flex-direction:column; align-items:center; padding:28px 20px; z-index:3; }
+
+  .page-title { margin: 8px 0 6px 0; font-size:20px; font-weight:700; color:#0b1220; text-align:center; }
+
+  .card { width:100%; max-width:420px; padding:18px; border-radius:12px; background:#ffffff; box-shadow:0 6px 20px rgba(15,23,42,0.04); position:relative; z-index:3; }
+
+  /* pill layout copied from login styles for visual parity */
+  .pill-card { position: relative; overflow: visible; padding: 28px 20px; border-radius: 18px; }
+  .pill-inputs { display:flex; flex-direction:column; gap:14px; margin-bottom:10px; }
+  .pill-row { position: relative; display:flex; align-items:center; background:#ffffff; border-radius:999px; padding:12px 56px 12px 18px; box-shadow:0 8px 20px rgba(15,23,42,0.04); border:1px solid rgba(10,10,10,0.03); }
+  .pill-row .left-icon { color:#0b1220; margin-right:12px; font-size:18px; background:#eef2f6; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 14px rgba(2,6,23,0.04); }
+  .pill-row .native-input, .pill-row input.native-input { width:100%; border:none; background:transparent; outline:none; font-size:15px; color:#000000 !important; padding:0; margin:0; }
+  .pill-content { display:flex; flex-direction:column; width:100%; }
+  .pill-label { font-size:12px; color:#000000; margin-bottom:4px; padding-left:2px; }
+
+  .action-circle { position:absolute; right:8px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background: linear-gradient(90deg,#0f766e,#089a87); border:none; display:flex; align-items:center; justify-content:center; color:#fff; z-index:6; box-shadow:0 8px 20px rgba(15,118,110,0.12); cursor:pointer; }
+  .action-circle ion-icon { color:#ffffff !important; font-size:18px !important; }
+  .action-circle ion-icon svg { stroke:#ffffff !important; fill:#ffffff !important; }
+
+  .blob { position:absolute; border-radius:50%; z-index:0; }
+  .blob-top-left { width:120px; height:120px; left:-36px; top:-36px; background: radial-gradient(circle at 30% 30%, #2b6cb0 0%, #1e40af 60%); }
+  .blob-bottom-right { width:140px; height:140px; right:-48px; bottom:-48px; background: radial-gradient(circle at 70% 70%, #ff7a59 0%, #ff4d00 60%); }
+
+  .form-note { margin-top:6px; display:block; color:#b00020; }
+  /* errores/pequeños textos dentro del formulario en gris oscuro para legibilidad */
+  .pill-row-errors .field-error small { color: #ff0000; }
+  small { color: #ff0000; }
+  .cta-row { margin-top:14px; display:flex; gap:8px; align-items:center; }
+  .btn-primary { --background:#0f766e; --color:#ffffff; --border-radius:10px; margin-top:8px; }
+  .btn-register { margin-left:auto; color:#0b1220; }
+}
+
+@media (max-width:420px) { .container { padding:20px 14px; } .card { padding:16px; } }

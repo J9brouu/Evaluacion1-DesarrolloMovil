@@ -1,0 +1,106 @@
+/* Styles for the listar (list) page using the same pill/card language as login/register */
+.list-page {
+	--background: transparent;
+	position: relative;
+	min-height: 100%;
+
+	.bg-gradient { position: absolute; inset:0; background: linear-gradient(180deg,#f7f8fa 0%, #fbfcfd 100%); z-index:0; }
+
+	.container { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:28px 20px; z-index:3; }
+
+	.page-title { margin:8px 0 6px 0; font-size:20px; font-weight:700; color:#0b1220; text-align:center; }
+
+	.list-card { width:100%; max-width:920px; padding:18px; border-radius:12px; background:#ffffff; box-shadow:0 6px 20px rgba(15,23,42,0.04); position:relative; }
+
+	.controls { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+		/* use Ionic searchbar but style it to match pill look */
+		.searchbar {
+			width:100%;
+			max-width:620px;
+			/* make the overall host transparent and style the inner container */
+            --background: #ffffff;
+			--border-radius: 999px;
+			--padding-start: 8px;
+			--padding-end: 8px;
+			--placeholder-color: #000000;
+			border: none; /* remove visible border line */
+			box-shadow: none;
+		}
+		/* the actual visible pill is the input container inside the searchbar */
+		.searchbar .searchbar-input-container {
+			background: #f6f7f9;
+			border-radius: 999px;
+			padding-left: 8px;
+			padding-right: 8px;
+			border: 1px solid #000000; /* subtle outline that matches card */
+		}
+		/* ensure inner input text is dark and caret visible across browsers and Ionic versions */
+		.searchbar .searchbar-input { color: #0b1220 !important; background: transparent; }
+		/* CSS variables exposed by Ion components */
+		.searchbar { --color: #0b1220 !important; --placeholder-color: #9aa3ad !important; }
+		/* target shadow DOM/native input when supported */
+		.searchbar::part(native),
+		.searchbar ::part(native),
+		.searchbar input,
+		.searchbar .searchbar-input input {
+			color: #0b1220 !important;
+			caret-color: #0b1220 !important;
+		}
+		/* placeholder color */
+		.searchbar ::-webkit-input-placeholder,
+		.searchbar ::placeholder,
+		.searchbar input::placeholder {
+			color: #9aa3ad !important;
+			opacity: 1 !important;
+		}
+
+		/* ensure decorative blobs don't intercept pointer events and stay behind content */
+		.blob { pointer-events: none; z-index: 0; }
+
+		.add-fab {
+			margin-left:12px;
+			min-width:44px;
+			height:44px;
+			padding:0 14px;
+			border-radius:999px;
+			background: linear-gradient(90deg,#0f766e,#089a87);
+			border:none;
+			display:inline-flex;
+			align-items:center;
+			justify-content:center;
+			color:#fff;
+			box-shadow:0 8px 20px rgba(15,118,110,0.12);
+			cursor:pointer;
+			z-index:6;
+			overflow:hidden;
+		}
+		.add-fab ion-icon { color:#fff !important; font-size:18px !important; display:inline-block; margin-right:8px; }
+		.add-fab .btn-text { color:#fff; font-weight:600; white-space:nowrap; }
+
+	.items { display:flex; flex-direction:column; gap:12px; margin-top:6px; }
+
+	.pill-row { position:relative; display:flex; align-items:center; background:#ffffff; border-radius:999px; padding:12px 56px 12px 14px; box-shadow:0 8px 20px rgba(15,23,42,0.04); border:1px solid rgba(10,10,10,0.03); }
+	.game-row .left-icon { width:52px; height:52px; border-radius:10px; background:#eef2f6; display:flex; align-items:center; justify-content:center; margin-right:12px; overflow:hidden; }
+	.game-row .left-icon img { width:100%; height:100%; object-fit:cover; }
+	.pill-content { display:flex; flex-direction:column; width:100%; padding-right:56px; }
+	.title { font-weight:600; color:#0b1220; }
+	.meta { font-size:13px; color:#6b7280; margin-top:4px; }
+
+	.action-circle { position:absolute; right:8px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background: linear-gradient(90deg,#0f766e,#089a87); border:none; display:flex; align-items:center; justify-content:center; color:#fff; z-index:6; box-shadow:0 8px 20px rgba(15,118,110,0.12); cursor:pointer; }
+	.action-circle ion-icon { color:#fff !important; font-size:18px !important; width:18px !important; height:18px !important; display:inline-block; }
+	/* force svg paths to use the white color in case ion-icon renders SVG with stroke/fill */
+	.action-circle ion-icon svg {
+		stroke: #ffffff !important;
+		fill: #ffffff !important;
+	}
+
+	.empty { text-align:center; color:#000000; padding:26px 0; }
+
+	.blob { position:absolute; border-radius:50%; z-index:0; }
+	.blob-top-left { width:120px; height:120px; left:-36px; top:-36px; background: radial-gradient(circle at 30% 30%, #2b6cb0 0%, #1e40af 60%); }
+	.blob-bottom-right { width:140px; height:140px; right:-48px; bottom:-48px; background: radial-gradient(circle at 70% 70%, #ff7a59 0%, #ff4d00 60%); }
+
+}
+
+@media (max-width:720px) { .list-card { padding:16px; } .pill-row { padding-right:48px; } }
+

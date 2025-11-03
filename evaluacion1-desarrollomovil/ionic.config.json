@@ -1,0 +1,7 @@
+{
+  "name": "evaluacion1-desarrollomovil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

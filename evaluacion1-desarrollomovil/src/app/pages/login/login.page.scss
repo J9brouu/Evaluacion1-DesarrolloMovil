@@ -1,0 +1,291 @@
+.login-page {
+  --background: transparent;
+  /* color base: asegurar texto legible (negro/gris) en toda la página */
+  color: #0b1220;
+  position: relative;
+  min-height: 100%;
+
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    /* fondo neutro muy sutil para un look minimalista */
+    background: linear-gradient(180deg, #f7f8fa 0%, #fbfcfd 100%);
+    opacity: 1;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px;
+    /* asegurar que el contenido esté sobre las decoraciones */
+    z-index: 3;
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      .logo-wrap { width: 64px; height: 64px; display:flex; align-items:center; justify-content:center; background: #ffffff; border-radius: 12px; box-shadow:0 6px 14px rgba(15,23,42,0.04); }
+      img { width: 44px; height: 44px; }
+      h1 { margin: 0; font-size: 20px; font-weight: 700; color: #0b1220; position: relative; z-index:4; }
+      .subtitle { margin: 0; color: #57606a; font-size: 13px; position: relative; z-index:4; }
+    }
+
+    /* título principal encima de todo */
+    .page-title {
+      margin: 8px 0 6px 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0b1220;
+      position: relative;
+      z-index: 4;
+      text-align: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      color: inherit;
+      padding: 18px;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 6px 20px rgba(15,23,42,0.04);
+      position: relative;
+      z-index: 3;
+    }
+
+    .input-item {
+      --padding-start: 12px;
+      --inner-padding-end: 8px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      ion-icon { color: #9aa3ad; }
+      &.invalid { box-shadow: inset 0 0 0 1px rgba(239,68,68,0.08); }
+      ion-input::part(native) { font-size: 15px; color: #000000 !important; caret-color: #000000 !important; }
+      /* compat: apuntar al input interno y a la clase native-input para múltiples versiones de Ionic */
+      ion-input,
+      ion-input input,
+      ion-input .native-input,
+      ion-input textarea {
+        color: #000000 !important;
+        caret-color: #000000 !important;
+      }
+      /* forzar variables CSS que Ionic puede usar internamente */
+      ion-input {
+        --color: #000000 !important;
+        --placeholder-color: #9aa3ad !important;
+      }
+      /* placeholder más tenue */
+  ion-input::part(native)::-webkit-input-placeholder { color: #9aa3ad; }
+  ion-input::part(native)::placeholder { color: #9aa3ad; }
+  /* aseguramos que el texto dentro del ion-input sea negro también en el host */
+  ion-input { color: #000000; }
+      background: #f6f7f9;
+      border: 1px solid #e6e9ee;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+
+    .options-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 6px 0 12px 0;
+  ion-checkbox { margin-right: 6px; }
+  /* asegurar fondo transparente para el item del checkbox */
+  background: transparent;
+  --background: transparent;
+  ion-label { color: #000000; }
+      ion-button { --padding-start: 0; --padding-end: 0; }
+    }
+
+    .btn-primary {
+      /* color de acento discreto para inventario de juegos */
+      --background: #0f766e; /* teal oscuro */
+      --color: #ffffff;
+      --border-radius: 10px;
+      --box-shadow: 0 6px 18px rgba(15,118,110,0.08);
+      margin-top: 8px;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 14px 0;
+      position: relative;
+      span {
+        background: white;
+        padding: 0 10px;
+        color: #888;
+        font-size: 13px;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        top: 50%;
+        height: 1px;
+        background: #eee;
+        z-index: 0;
+      }
+    }
+
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      .social {
+        --border-radius: 10px;
+        ion-icon { font-size: 18px; }
+        --background: #ffffff;
+        border: 1px solid #e6e9ee;
+        color: #0b1220;
+      }
+      .google { background: #ffffff; }
+      .fb { background: #ffffff; }
+    }
+
+    .footer-links {
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+    }
+
+    /* estilos para versión 'pill' similar al mock */
+    .pill-card {
+      position: relative;
+      overflow: visible;
+      padding: 28px 20px;
+      border-radius: 18px;
+    }
+
+    .pill-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .pill-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 12px 56px 12px 18px; /* espacio para botón circular a la derecha */
+      box-shadow: 0 8px 20px rgba(15,23,42,0.04);
+      border: 1px solid rgba(10,10,10,0.03);
+    }
+
+    .pill-row .left-icon {
+      color: #0b1220;
+      margin-right: 12px;
+      font-size: 18px;
+      background: #eef2f6;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 14px rgba(2,6,23,0.04);
+    }
+
+    /* estilos para inputs nativos dentro de la pill */
+  .pill-row ion-input { --padding-start: 0; width: 100%; }
+    .pill-row .native-input,
+    .pill-row input.native-input,
+    .pill-row textarea.native-input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 15px;
+      color: #000000 !important;
+      padding: 0;
+      margin: 0;
+    }
+  .pill-content { display:flex; flex-direction:column; width:100%; color: #000000; }
+    .pill-label { font-size:12px; color:#000000; margin-bottom:4px; padding-left:2px; }
+
+    .action-circle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #0f766e, #089a87);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      z-index: 6;
+      box-shadow: 0 8px 20px rgba(15,118,110,0.12);
+      cursor: pointer;
+    }
+    /* asegurar que el ion-icon dentro del botón sea visible */
+    .action-circle ion-icon {
+      color: #ffffff !important;
+      font-size: 18px !important;
+      width: 18px !important;
+      height: 18px !important;
+      display: inline-block;
+      line-height: 1;
+    }
+    /* forzar que el SVG del ion-icon use color blanco tanto en stroke como en fill */
+    .action-circle ion-icon svg {
+      stroke: #ffffff !important;
+      fill: #ffffff !important;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0; /* behind card but above page background */
+      opacity: 1;
+    }
+    .blob-top-left {
+      width: 120px;
+      height: 120px;
+      left: -36px;
+      top: -36px;
+      background: radial-gradient(circle at 30% 30%, #2b6cb0 0%, #1e40af 60%);
+    }
+    .blob-bottom-right {
+      width: 140px;
+      height: 140px;
+      right: -48px;
+      bottom: -48px;
+      background: radial-gradient(circle at 70% 70%, #ff7a59 0%, #ff4d00 60%);
+    }
+
+  .form-note { margin-top: 6px; display:block; color: #b00020; }
+    .small-opts { margin-top: 6px; }
+    .cta-row { margin-top: 14px; display:flex; gap:8px; align-items:center; }
+    .btn-register { margin-left: auto; color: #0b1220; }
+
+    /* forzar texto negro en título y otros labels */
+    .page-title, .brand h1, .subtitle, .pill-label, .footer-links, .social .button-inner, ion-label {
+      color: #000000 !important;
+    }
+
+    /* botones sociales: texto oscuro */
+    .social { color: #0b1220 !important; }
+  }
+
+  @media (max-width: 420px) {
+    .container { padding: 20px 14px; }
+    .card { padding: 16px; }
+  }
+}

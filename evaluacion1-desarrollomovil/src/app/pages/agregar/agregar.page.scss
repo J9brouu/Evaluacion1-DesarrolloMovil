@@ -1,0 +1,36 @@
+/* Styles for the Agregar (create) page - consistent with login/register/listar */
+.add-page { position: relative; min-height:100%; --background: transparent; color: #0b1220; /* forzar color de texto oscuro */ }
+.add-page .bg-gradient { position:absolute; inset:0; background: linear-gradient(180deg,#f7f8fa 0%, #fbfcfd 100%); z-index:0; }
+.add-page .container { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:30px 20px; }
+.page-title { margin:8px 0 12px 0; font-size:20px; font-weight:700; color:#0b1220; }
+.form-card { width:100%; max-width:920px; padding:18px; border-radius:12px; background:#ffffff; box-shadow:0 6px 20px rgba(15,23,42,0.04); position:relative; z-index:3; }
+.pill-row { position:relative; display:flex; align-items:center; background:#ffffff; border-radius:999px; padding:12px 56px 12px 14px; box-shadow:0 8px 20px rgba(15,23,42,0.04); border:1px solid rgba(10,10,10,0.03); margin-bottom:12px; }
+.pill-content { display:flex; flex-direction:column; width:100%; padding-right:56px; }
+.label { font-size:12px; color:#6b7280; margin-bottom:6px; }
+.native-input { border:none; outline:none; background:transparent; color:#0b1220; font-size:15px; padding:6px 0; width:100%; }
+.native-input::placeholder { color:#9aa3ad; }
+/* mensajes/pequeños textos en oscuro para legibilidad */
+.field-error small, small { color: #ff0000; }
+.action-circle { position:absolute; right:8px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background: linear-gradient(90deg,#0f766e,#089a87); border:none; display:flex; align-items:center; justify-content:center; color:#fff; z-index:6; box-shadow:0 8px 20px rgba(15,118,110,0.12); cursor:pointer; }
+.action-circle[disabled] { opacity:0.6; pointer-events:none; }
+.action-circle ion-icon { color:#fff !important; font-size:18px !important; width:18px !important; height:18px !important; }
+
+/* Actions (Agregar / Cancelar) - mantener estética pill */
+.actions { display:flex; gap:12px; margin-top:16px; justify-content:flex-end; position:relative; z-index:8; }
+.actions .btn-primary,
+.actions .btn-cancel { display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; font-weight:600; cursor:pointer; border: none; }
+.actions .btn-primary { background: linear-gradient(90deg,#0f766e,#089a87); color:#fff; box-shadow:0 8px 20px rgba(15,118,110,0.12); }
+.actions .btn-primary[disabled] { opacity:0.6; pointer-events:none; }
+.actions .btn-primary ion-icon { font-size:18px; color: #fff; }
+.actions .btn-cancel { background: white; border:1px solid rgba(11,18,32,0.06); color:#0b1220; }
+.actions .btn-cancel ion-icon { font-size:18px; color: #0b1220; }
+.actions .btn-text { display:inline-block; margin-left:2px; }
+
+@media (max-width:720px) { .actions { justify-content:stretch; flex-direction:column-reverse; } .actions .btn-primary, .actions .btn-cancel { width:100%; justify-content:center; } }
+
+  .blob { position:absolute; border-radius:50%; z-index:0; pointer-events:none; }
+  .blob-top-left { width:120px; height:120px; left:-36px; top:-36px; background: radial-gradient(circle at 30% 30%, #2b6cb0 0%, #1e40af 60%); }
+  .blob-bottom-right { width:140px; height:140px; right:-48px; bottom:-48px; background: radial-gradient(circle at 70% 70%, #ff7a59 0%, #ff4d00 60%); }
+
+@media (max-width:720px) { .form-card { padding:16px; } .pill-row { padding-right:48px; } }
+
