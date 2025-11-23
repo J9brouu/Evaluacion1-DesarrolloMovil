@@ -51,7 +51,7 @@
 
       <div class="cta-row">
         <!-- el botón se deshabilita si el formulario es inválido; el submit dispara (ngSubmit) en el form -->
-        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="btn-primary">Iniciar sesión</ion-button>
+        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="btn-primary" (click)="goToListar()">Iniciar sesión</ion-button>
         <ion-button fill="clear" size="small" (click)="goToRegister()" class="btn-register">Crear cuenta</ion-button>
       </div>
 

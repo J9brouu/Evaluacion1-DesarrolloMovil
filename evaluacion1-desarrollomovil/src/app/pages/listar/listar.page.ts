@@ -5,8 +5,6 @@ import { NavController, ToastController } from '@ionic/angular';
 import {
   IonContent,
   IonHeader,
-  IonTitle,
-  IonToolbar,
   IonIcon,
   IonSearchbar
 } from '@ionic/angular/standalone';
@@ -20,7 +18,7 @@ import { GameService, Game } from '../../services/game.service';
   templateUrl: './listar.page.html',
   styleUrls: ['./listar.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonSearchbar, CommonModule, FormsModule, FilterGamesPipe]
+  imports: [IonContent, IonHeader, IonIcon, IonSearchbar, CommonModule, FormsModule, FilterGamesPipe]
 })
 export class ListarPage implements OnInit {
   games: Game[] = [];

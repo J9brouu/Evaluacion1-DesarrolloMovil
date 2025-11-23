@@ -34,4 +34,16 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./pages/register/register.page').then( m => m.RegisterPage)
   },
+  {
+    path: 'testcamera',
+    loadComponent: () => import('./pages/testcamera/testcamera.page').then( m => m.TestcameraPage)
+  },
+  {
+    path: 'testgeo',
+    loadComponent: () => import('./pages/testgeo/testgeo.page').then( m => m.TestgeoPage)
+  },
+  {
+    path: 'testapi',
+    loadComponent: () => import('./pages/testapi/testapi.page').then( m => m.TestapiPage)
+  },
 ];

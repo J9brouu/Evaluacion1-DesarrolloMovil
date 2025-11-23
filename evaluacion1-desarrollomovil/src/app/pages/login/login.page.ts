@@ -15,6 +15,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personOutline, lockClosedOutline, eye, eyeOff, logoGoogle, logoFacebook} from 'ionicons/icons';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -44,6 +45,7 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController
+    , private userSvc: UserService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -122,16 +124,29 @@ export class LoginPage implements OnInit {
       await t.present();
       return;
     }
-
     const loading = await this.loadingCtrl.create({ message: 'Iniciando sesión...' });
     await loading.present();
 
-    // Simular petición: reemplaza por llamada real a tu servicio de autenticación
-    setTimeout(async () => {
+    // Validar credenciales con UserService (inyectado)
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+    try {
+      const res = await this.userSvc.validateCredentials(email, password);
       await loading.dismiss();
-      // Ejemplo: si login correcto, navegar al home
-      this.navCtrl.navigateRoot('/home');
-    }, 900);
+      if (res.ok) {
+        if (this.loginForm.value.remember) {
+          try { localStorage.setItem('app_current_user', JSON.stringify({ id: res.user!.id, email: res.user!.email })); } catch (e) { }
+        }
+        this.navCtrl.navigateRoot('/listar');
+      } else {
+        const t = await this.toastCtrl.create({ message: 'Credenciales incorrectas', duration: 1800, color: 'danger' });
+        await t.present();
+      }
+    } catch (err) {
+      await loading.dismiss();
+      const t = await this.toastCtrl.create({ message: 'Error en autenticación', duration: 1800, color: 'danger' });
+      await t.present();
+    }
   }
 
   async forgotPassword() {
@@ -146,5 +161,10 @@ export class LoginPage implements OnInit {
 
   goToRegister() {
     this.navCtrl.navigateForward('/register');
+  }
+
+  goToListar() {
+    // navegación usada por el botón si está vinculada con (click)
+    this.navCtrl.navigateRoot('/listar');
   }
 }

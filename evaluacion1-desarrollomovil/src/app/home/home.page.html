@@ -1,20 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="login-page" [fullscreen]="true">
+  <div class="bg-gradient" aria-hidden="true"></div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+
+  <div class="container">
+    <div class="brand">
+      <div class="logo-wrap">
+        <!-- si tienes un logo, reemplaza el src -->
+        <img src="assets/img/library-cover.png" alt="logo" />
+      </div>
+      <h1 class="page-title">Bienvenido</h1>
+      <p class="subtitle">Accede para continuar</p>
+    </div>
+
+    <div class="card pill-card welcome-card">
+      <div class="blob blob-top-left" aria-hidden="true"></div>
+      <div class="blob blob-bottom-right" aria-hidden="true"></div>
+
+      <div class="cta-row" style="justify-content:center;">
+        <ion-button expand="block" class="btn-primary btn-enter" (click)="goToLogin()">Entrar</ion-button>
+      </div>
+
+      <div class="footer-links" style="margin-top:12px; justify-content:center;">
+        <ion-button fill="clear" size="small" (click)="goToRegister()">Crear cuenta</ion-button>
+      </div>
+    </div>
   </div>
 </ion-content>

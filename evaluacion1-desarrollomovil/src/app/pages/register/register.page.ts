@@ -11,6 +11,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personOutline, lockClosedOutline, eye, eyeOff, logoGoogle, logoFacebook, personCircleOutline, mailOutline, lockOpenOutline } from 'ionicons/icons';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,8 @@ export class RegisterPage implements OnInit {
     private fb: FormBuilder,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private userSvc: UserService
   ) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -99,9 +101,19 @@ export class RegisterPage implements OnInit {
 
     setTimeout(async () => {
       await loading.dismiss();
-      // Tras registro, navegar al login
+      // Intentar registrar en UserService
+      const name = this.registerForm.value.name;
+      const email = this.registerForm.value.email;
+      const password = this.registerForm.value.password;
+      const res = await this.userSvc.register(name, email, password);
+      if (!res.ok) {
+        const t = await this.toastCtrl.create({ message: `No se pudo crear cuenta: ${res.reason}`, duration: 1800, color: 'danger' });
+        await t.present();
+        return;
+      }
+      // Tras registro exitoso, navegar al login
       this.navCtrl.navigateBack(['/login']);
-      const t = await this.toastCtrl.create({ message: 'Cuenta creada (simulado)', duration: 1400, color: 'success' });
+      const t = await this.toastCtrl.create({ message: 'Cuenta creada', duration: 1400, color: 'success' });
       await t.present();
     }, 900);
   }
