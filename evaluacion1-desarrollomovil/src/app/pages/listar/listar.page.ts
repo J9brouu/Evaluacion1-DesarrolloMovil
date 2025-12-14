@@ -5,28 +5,26 @@ import { NavController, ToastController } from '@ionic/angular';
 import {
   IonContent,
   IonHeader,
-  IonTitle,
-  IonToolbar,
   IonIcon,
   IonSearchbar
 } from '@ionic/angular/standalone';
 import { FilterGamesPipe } from '../../pipes/filter-games.pipe';
 import { addIcons } from 'ionicons';
 import { addOutline, caretForwardOutline } from 'ionicons/icons';
-import { GameService, Game } from '../../services/game.service';
+import { FirebaseGameService, Game } from '../../services/firebase-game.service';
 
 @Component({
   selector: 'app-listar',
   templateUrl: './listar.page.html',
   styleUrls: ['./listar.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonSearchbar, CommonModule, FormsModule, FilterGamesPipe]
+  imports: [IonContent, IonHeader, IonIcon, IonSearchbar, CommonModule, FormsModule, FilterGamesPipe]
 })
 export class ListarPage implements OnInit {
   games: Game[] = [];
   filter = '';
 
-  constructor(private navCtrl: NavController, private toastCtrl: ToastController, private gameSvc: GameService) {
+  constructor(private navCtrl: NavController, private toastCtrl: ToastController, private gameSvc: FirebaseGameService) {
     // registrar con un nombre (clave) válido
     addIcons({ 
       'add-outline': addOutline,
@@ -44,8 +42,9 @@ export class ListarPage implements OnInit {
   }
 
   ngOnInit() {
-    this.gameSvc.all().subscribe(list => {
+    this.gameSvc.obtenerJuegos().subscribe(list => {
       this.games = list;
+      console.log('Juegos cargados desde Firebase:', list);
     });
   }
 

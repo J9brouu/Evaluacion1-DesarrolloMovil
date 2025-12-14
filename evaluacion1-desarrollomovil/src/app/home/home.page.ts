@@ -1,12 +1,21 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonContent, IonButton } from '@ionic/angular/standalone';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonHeader, IonContent, IonButton],
 })
 export class HomePage {
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
+
+  goToLogin() {
+    this.navCtrl.navigateForward('/login');
+  }
+
+  goToRegister() {
+    this.navCtrl.navigateForward('/register');
+  }
 }

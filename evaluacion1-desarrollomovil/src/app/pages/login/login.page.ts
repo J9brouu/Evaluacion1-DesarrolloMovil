@@ -15,6 +15,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personOutline, lockClosedOutline, eye, eyeOff, logoGoogle, logoFacebook} from 'ionicons/icons';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -44,6 +45,7 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController
+    , private userSvc: UserService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -122,16 +124,54 @@ export class LoginPage implements OnInit {
       await t.present();
       return;
     }
-
     const loading = await this.loadingCtrl.create({ message: 'Iniciando sesión...' });
     await loading.present();
 
-    // Simular petición: reemplaza por llamada real a tu servicio de autenticación
-    setTimeout(async () => {
+    // Validar credenciales con UserService (inyectado)
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+    
+    console.log('Intentando login con email:', email);
+    
+    try {
+      const res = await this.userSvc.validateCredentials(email, password);
       await loading.dismiss();
-      // Ejemplo: si login correcto, navegar al home
-      this.navCtrl.navigateRoot('/home');
-    }, 900);
+      
+      console.log('Resultado de validateCredentials:', res);
+      
+      if (res.ok === true && res.user) {
+        console.log(`Login exitoso - Rol: ${res.user.rol}, navegando a /listar`);
+        if (this.loginForm.value.remember) {
+          try { 
+            localStorage.setItem('app_current_user', JSON.stringify({ 
+              id: res.user.id, 
+              email: res.user.email,
+              rol: res.user.rol
+            })); 
+          } catch (e) { }
+        }
+        
+        // Mostrar mensaje de bienvenida con rol
+        const rolMensaje = res.user.rol === 'admin' ? ' (Administrador)' : '';
+        const welcomeToast = await this.toastCtrl.create({
+          message: `Bienvenido${rolMensaje}`,
+          duration: 1500,
+          color: 'success'
+        });
+        await welcomeToast.present();
+        
+        this.navCtrl.navigateRoot('/listar');
+      } else {
+        console.log('Login fallido');
+        const t = await this.toastCtrl.create({ message: 'Credenciales incorrectas', duration: 1800, color: 'danger' });
+        await t.present();
+      }
+    } catch (err) {
+      console.error('Error en login:', err);
+      await loading.dismiss();
+      const t = await this.toastCtrl.create({ message: 'Error en autenticación', duration: 1800, color: 'danger' });
+      await t.present();
+    }
   }
 
   async forgotPassword() {

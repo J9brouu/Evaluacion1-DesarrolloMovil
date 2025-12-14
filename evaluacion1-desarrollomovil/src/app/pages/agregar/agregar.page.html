@@ -74,6 +74,14 @@
               <div class="label">URL de portada (opcional)</div>
               <input class="native-input" formControlName="cover" placeholder="assets/img/library-cover.png o https://..." />
             </label>
+            <ion-button expand="block" class="btn-secondary" (click)="tomarFoto()" type="button">
+              <ion-icon name="camera-outline" aria-hidden="true"></ion-icon>
+              <span class="btn-text">Tomar foto con cámara</span>
+            </ion-button>
+              <div *ngIf="imagenCapturada">
+        <h2>Foto tomada:</h2>
+        <img class="cover-preview" [src]="imagenCapturada" />
+      </div>
           </div>
 
           <div class="actions">

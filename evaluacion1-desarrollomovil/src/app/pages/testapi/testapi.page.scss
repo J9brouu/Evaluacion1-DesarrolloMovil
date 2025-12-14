@@ -1,0 +1,48 @@
+/* Estilos del listado de usuarios — reutiliza lenguaje visual de login/register */
+.users-page {
+  .container { max-width: 920px; margin: 0 auto; padding: 20px; }
+
+  /* use global container values */
+  .container { max-width: var(--app-max-width); padding-left: var(--app-container-padding); padding-right: var(--app-container-padding); }
+
+  .top-actions { text-align: center; margin-bottom: 12px; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .user-card {
+    border-radius: 14px;
+    padding: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15,23,42,0.04);
+    .card-inner { display:flex; gap:12px; align-items:center; }
+  }
+
+  .avatar { width:64px; height:64px; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#2b6cb0,#1e40af); }
+  .avatar img { width:100%; height:100%; object-fit:cover; }
+  .initials { color:#fff; font-weight:700; font-size:18px; }
+
+  .info { flex:1; }
+  .name-row { display:flex; align-items:center; gap:8px; }
+  .role-chip { --background: rgba(15,118,110,0.08); --color: #0f766e; height:24px; }
+
+  .email, .rut { color: #57606a; font-size:13px; margin:4px 0 0 0; }
+
+  .actions { display:flex; flex-direction:column; gap:8px; }
+
+  /* pequeños ajustes responsive */
+  @media (max-width:720px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .user-card .card-inner { flex-direction:row; }
+  }
+
+  /* ensure pill-like rows wrap on small screens */
+  .user-card .card-inner { flex-wrap: wrap; }
+}
+
+/* Ajustes para integrar blobs y tarjetas al estilo login */
+.users-page .blob-top-left { left: -48px; top: -48px; }
+.users-page .blob-bottom-right { right: -48px; bottom: -48px; }

@@ -1,9 +1,10 @@
 .detail-page { position: relative; min-height:100%; --background: transparent; }
 .detail-page .bg-gradient { position:absolute; inset:0; background: linear-gradient(180deg,#f7f8fa 0%, #fbfcfd 100%); z-index:0; }
 .detail-page .container { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding:30px 20px; }
+.detail-page .container { max-width: var(--app-max-width); padding-left: var(--app-container-padding); padding-right: var(--app-container-padding); }
 .page-title { margin:8px 0 12px 0; font-size:20px; font-weight:700; color:#0b1220; }
 .form-card { width:100%; max-width:920px; padding:18px; border-radius:12px; background:#ffffff; box-shadow:0 6px 20px rgba(15,23,42,0.04); position:relative; z-index:3; }
-.pill-row { position:relative; display:flex; align-items:center; background:#ffffff; border-radius:999px; padding:12px 56px 12px 14px; box-shadow:0 8px 20px rgba(15,23,42,0.04); border:1px solid rgba(10,10,10,0.03); margin-bottom:12px; }
+.pill-row { position:relative; display:flex; align-items:center; background:#ffffff; border-radius:999px; padding:12px 56px 12px 14px; box-shadow:0 8px 20px rgba(15,23,42,0.04); border:1px solid rgba(10,10,10,0.03); margin-bottom:12px; flex-wrap:wrap; gap:10px; }
 .pill-content { display:flex; flex-direction:column; width:100%; padding-right:56px; }
 .label { font-size:12px; color:#6b7280; margin-bottom:6px; }
 .native-input { border:none; outline:none; background:transparent; color:#0b1220; font-size:15px; padding:6px 0; width:100%; }
@@ -11,7 +12,23 @@
 .field-error small, small { color: #3a3a3a; }
 .cover-preview { width:56px; height:56px; margin-left:12px; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
 .cover-preview img { width:100%; height:100%; object-fit:cover; }
+
+/* Estilo similar a la página Agregar: vista grande de previsualización */
+.cover-block { margin-top:8px; }
+.cover-block h2 { margin: 8px 0; font-size:18px; }
+.cover-preview-large { display:block; max-width:260px; max-height:320px; width:auto; height:auto; border-radius:10px; object-fit:cover; box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
+@media (max-width:720px) {
+	.cover-preview-large { max-width:140px; max-height:180px; }
+}
 .action-circle { position:absolute; right:8px; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background: linear-gradient(90deg,#0f766e,#089a87); border:none; display:flex; align-items:center; justify-content:center; color:#fff; z-index:6; box-shadow:0 8px 20px rgba(15,118,110,0.12); cursor:pointer; }
+
+/* estilos para los botones de foto junto al input */
+.photo-actions { display:flex; flex-direction:column; gap:6px; margin-left:12px; }
+.photo-actions ion-button { --border-radius: 8px; --padding-start: 8px; --padding-end: 8px; height:36px; font-size:13px; }
+
+/* hint cuando no hay imagen (texto pequeño y tenue) */
+.cover-hint { color: #9aa3ad; font-size:13px; margin-left:4px; }
+.cover-preview { margin-left:12px; }
 
 /* Actions */
 .actions { display:flex; gap:12px; margin-top:16px; justify-content:flex-end; position:relative; z-index:8; }

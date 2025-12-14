@@ -49,8 +49,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "8kb",
+                  "maximumError": "16kb"
                 }
               ],
               "fileReplacements": [
@@ -83,7 +83,7 @@
               "buildTarget": "app:build:development"
             },
             "ci": {
-              "progress": false
+              "progreioss": false
             }
           },
           "defaultConfiguration": "development"

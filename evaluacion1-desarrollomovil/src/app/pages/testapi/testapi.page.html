@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="login-page users-page">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Usuarios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <div class="top-actions">
+      <h2 class="title">Listado de usuarios</h2>
+      <p class="subtitle">Mantén la consistencia con el estilo de login/listar</p>
+    </div>
+
+    <div *ngIf="cargando" class="empty-state">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando usuarios...</p>
+    </div>
+
+    <div *ngIf="!cargando && (!usuarios || usuarios.length === 0)" class="empty-state">
+      <p>No hay usuarios registrados</p>
+    </div>
+
+    <div class="cards-grid" *ngIf="usuarios?.length">
+      <ion-card *ngFor="let usuario of usuarios" class="user-card">
+        <div class="card-inner">
+          <div class="avatar" aria-hidden="true">
+            <img *ngIf="usuario.avatarUrl; else initials" [src]="usuario.avatarUrl" alt="avatar" />
+            <ng-template #initials>
+              <span class="initials">
+                {{ (usuario.nombre.charAt(0) || '') + (usuario.apellido.charAt(0) || '') | uppercase }}
+              </span>
+            </ng-template>
+          </div>
+
+          <div class="info">
+            <div class="name-row">
+              <h3>{{ usuario.nombre }} {{ usuario.apellido }}</h3>
+              <ion-chip class="role-chip">
+                <ion-label>{{ usuario.rol }}</ion-label>
+              </ion-chip>
+            </div>
+            <p class="email">{{ usuario.email }}</p>
+            <p class="rut">RUT: {{ usuario.rut }}</p>
+          </div>
+
+          <div class="actions">
+            <ion-button fill="clear" size="small" (click)="verDetalle(usuario)">
+              Ver
+            </ion-button>
+            <ion-button size="small" color="primary" (click)="editarUsuario(usuario)">
+              Editar
+            </ion-button>
+          </div>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
